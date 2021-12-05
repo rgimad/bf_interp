@@ -12,7 +12,7 @@
 fn main() {
     // let code1 = String::from("+++-------:++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++.");
     // let code2 = String::from("++++++++++[>+++++++>++++++++++>+++>+<<<<-]>++.>+.+++++++..+++.>++.<<+++++++++++++++.>.+++.------.--------.>+.>.");
-    let code3 = String::from(">+++++++++[<+++++++++++>-]<[>[-]>[-]<<[>+>+<<-]>>[<<+>>-]>>>
+    let code3 = b">+++++++++[<+++++++++++>-]<[>[-]>[-]<<[>+>+<<-]>>[<<+>>-]>>>
     [-]<<<+++++++++<[>>>+<<[>+>[-]<<-]>[<+>-]>[<<++++++++++>>>+<
     -]<<-<-]+++++++++>[<->-]>>+>[<[-]<<+>>>-]>[-]+<<[>+>-<<-]<<<
     [>>+>+<<<-]>>>[<<<+>>>-]>[<+>-]<<-[>[-]<[-]]>>+<[>[-]<-]<+++
@@ -55,7 +55,7 @@ fn main() {
     <+++++++++>-]<--.-.>++++++++[<---------->-]<++.>++++++++[<++
     ++++++++>-]<++++.------------.---.>+++++++[<---------->-]<+.
     >++++++++[<+++++++++++>-]<-.>++[<----------->-]<.+++++++++++
-    ..>+++++++++[<---------->-]<-----.---.+++.---.[-]<<<]");
+    ..>+++++++++[<---------->-]<-----.---.+++.---.[-]<<<]";
     let code = code3;
 
     let mut mem = [0 as i8; 30000];
@@ -63,28 +63,28 @@ fn main() {
     let mut dc : usize = 0; // data counter
     let mut stack : Vec<usize> = Vec::new(); // stack of positions of loop beginnings
     while pc < code.len() {
-        match code.chars().nth(pc).unwrap() {
-            '+' => { mem[dc] += 1; },
-            '-' => { mem[dc] -= 1; },
-            '>' => {
+        match code[pc] {
+            b'+' => { mem[dc] += 1; },
+            b'-' => { mem[dc] -= 1; },
+            b'>' => {
                 // println!("> {}", pc);
                 dc += 1;
             },
-            '<' => {
+            b'<' => {
                 // println!("<");
                 dc -= 1;
                 //println!("dc = {}", dc);
             },
-            ',' => { println!("TODO"); },
-            '.' => { print!("{}", mem[dc] as u8 as char); },
-            ':' => { print!("{}", mem[dc]); },
-            '[' => {
+            b',' => { println!("TODO"); },
+            b'.' => { print!("{}", mem[dc] as u8 as char); },
+            b':' => { print!("{}", mem[dc]); },
+            b'[' => {
                 let mut cnt = 0;
                 let mut close_found = false;
                 for j in pc..code.len() {
-                    match code.chars().nth(j).unwrap() {
-                        '[' => { cnt += 1; },
-                        ']' => { if cnt > 0 {cnt -= 1;} else { panic!("unpaired brackets"); } },
+                    match code[j] {
+                        b'[' => { cnt += 1; },
+                        b']' => { if cnt > 0 {cnt -= 1;} else { panic!("unpaired brackets"); } },
                         _ => {}
                     }
                     if cnt == 0 { // we've found close brace
@@ -101,7 +101,7 @@ fn main() {
                 }
                 if !close_found { panic!("unpaired brackets"); }
             },
-            ']' => {
+            b']' => {
                 if !stack.is_empty() {
                     if mem[dc] != 0 {
                         // println!("mem[dc] = {}, dc = {}", mem[dc], dc);
