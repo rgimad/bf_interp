@@ -62,7 +62,6 @@ fn main() {
     let mut pc : usize = 0; // program counter
     let mut dc : usize = 0; // data counter
     let mut stack : Vec<usize> = Vec::new(); // stack of positions of loop beginnings
-    let mut tick: usize = 0;
     while pc < code.len() {
         match code.chars().nth(pc).unwrap() {
             '+' => { mem[dc] += 1; },
@@ -117,9 +116,5 @@ fn main() {
             _ => {}
         }
         pc += 1;
-        tick += 1;
-        if tick % 10000 == 0 {
-            println!("pc = {}, dc = {}, mem[dc] = {}", pc, dc, mem[dc]);
-        }
     }
 }
