@@ -8,7 +8,11 @@
 // . print current cell as ASCII char
 // [ code ] while(mem[pc]) { code } 
 
-use std::{env, fs, process};
+use std::env;
+use std::fs;
+use std::process;
+use std::io::Write;
+use std::io::Read;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -34,12 +38,24 @@ fn main() {
     let mut stack : Vec<usize> = Vec::new(); // stack of positions of loop beginnings
     while pc < code.len() {
         match code[pc] {
-            b'+' => { mem[dc] += 1; },
-            b'-' => { mem[dc] -= 1; },
+            b'+' => {
+                //mem[dc] += 1;
+                mem[dc] = mem[dc].wrapping_add(1); // add with overflow. 128 -> -128, 129 -> -127 etc.
+            },
+            b'-' => {
+                //mem[dc] -= 1;
+                mem[dc] = mem[dc].wrapping_sub(1); // subract with overflow
+            },
             b'>' => { dc += 1; },
             b'<' => { dc -= 1; },
-            b',' => { println!("TODO"); }, // TODO
-            b'.' => { print!("{}", mem[dc] as u8 as char); },
+            b',' => {
+                let inp = std::io::stdin().bytes().next().unwrap().unwrap() as i8;
+                mem[dc] = if inp == b'\r' as i8 {b'\n' as i8} else {inp}; // convert CRLF to LF
+            },
+            b'.' => {
+                print!("{}", mem[dc] as u8 as char);
+                std::io::stdout().flush().unwrap(); // flush makes chars immediatly appear on the screen
+            },
             b'[' => {
                 let mut cnt = 0;
                 let mut close_found = false;

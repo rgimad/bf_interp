@@ -4,4 +4,6 @@
 bf <file>
 ```
 ### TODO:
-- Implement ```,``` command
+- Test with incorrect bf programs
+- Improve code style
+- More test bf programs
