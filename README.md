@@ -4,8 +4,6 @@
 bf <file>
 ```
 ### TODO:
-- Test with incorrect bf programs
-- Improve code style
-- More test bf programs
-- Maybe use more optimal parsing algorithm (precompile jump positions.)
-- Maybe perform optimizations before running (pack + - > < series)
+- Add autotests, and test also with incorrect bf programs
+- Maybe use more efficient parsing algorithm (precompile jump positions.)
+- Maybe perform optimizations before running (pack + - > < series like +++++ change to += 5)

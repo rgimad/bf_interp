@@ -33,9 +33,9 @@ fn main() {
     let code = file_content.as_bytes();
 
     let mut mem = [0 as i8; 30000];
-    let mut pc : usize = 0; // program counter
-    let mut dc : usize = 0; // data counter
-    let mut stack : Vec<usize> = Vec::new(); // stack of positions of loop beginnings
+    let mut pc  = 0usize; // program counter
+    let mut dc  = 0usize; // data counter
+    let mut stack= Vec::<usize>::new(); // stack of positions of loop beginnings
     while pc < code.len() {
         match code[pc] {
             b'+' => {
