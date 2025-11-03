@@ -8,6 +8,8 @@
 // . print current cell as ASCII char
 // [ code ] while(mem[pc]) { code } 
 
+// TODO make struct of context and impl for interpreter
+
 use std::env;
 use std::fs;
 use std::process;
