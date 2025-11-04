@@ -1,4 +1,4 @@
-use libbrainsight::{parse, Op, Interpreter};
+use libbfside::{parse, Op, Interpreter};
 
 #[test]
 fn test_parse_simple_operations() {

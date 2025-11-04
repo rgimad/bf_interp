@@ -1,4 +1,4 @@
-## Brainsight
+## BFside
 Yet another BF langugage interpreter written in Rust
 
 ### Usage:

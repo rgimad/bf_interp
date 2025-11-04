@@ -2,7 +2,7 @@ use std::env;
 use std::fs;
 use std::process;
 
-use libbrainsight::{parse, Interpreter};
+use libbfside::{parse, Interpreter};
 
 fn main() {
     let args: Vec<String> = env::args().collect();

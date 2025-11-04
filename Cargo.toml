@@ -1,14 +1,14 @@
 [package]
-name = "brainsight"
+name = "bfside"
 version = "0.1.0"
 edition = "2021"
 
 [[bin]]
-name = "brainsight"
+name = "bfside"
 path = "src/main.rs"
 
 [lib]
-name = "libbrainsight"
+name = "libbfside"
 path = "src/lib.rs"
 
 [dependencies]
