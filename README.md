@@ -1,9 +1,13 @@
-## Brainfuck interpreter written in Rust
+## Brainsight
+Yet another BF langugage interpreter written in Rust
+
 ### Usage:
 ```
-bf <file>
+cargo run myfile.bf
 ```
+
 ### TODO:
-- Add autotests, and test also with incorrect bf programs
-- Maybe use more efficient parsing algorithm (precompile jump positions.)
-- Maybe perform optimizations before running (pack + - > < series like +++++ change to += 5)
+- Add autotests with incorrect bf programs
+- Add printing AST with indents
+- Add gui editor with syntax highlighting
+
