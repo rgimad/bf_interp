@@ -6,12 +6,12 @@ use libbfside::{parse, Interpreter};
 
 fn main() {
     let args: Vec<String> = env::args().collect();
-    
+
     if args.len() < 2 {
         eprintln!("Usage: {} <file>", args[0]);
         process::exit(1);
     }
-    
+
     let filename = &args[1];
     let file_content = match fs::read(filename) {
         Ok(content) => content,
@@ -20,7 +20,7 @@ fn main() {
             process::exit(2);
         }
     };
-    
+
     let program = match parse(&file_content) {
         Ok(program) => program,
         Err(e) => {
@@ -28,7 +28,10 @@ fn main() {
             process::exit(3);
         }
     };
-    
+
+    // works well TODO make cli option for it
+    //println!("AST: {:#?}", program);
+
     let mut interpreter = Interpreter::new();
     if let Err(e) = interpreter.run(&program) {
         eprintln!("Runtime error: {}", e);
